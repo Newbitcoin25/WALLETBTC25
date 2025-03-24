@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin25 (BTC25) - The Future of DeFi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(90deg, #007bff, #00d4ff);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        nav {
+            background: rgba(11, 22, 34, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        nav a {
+            color: #00d4ff;
+            font-family: 'Orbitron', sans-serif;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #fff;
+            text-shadow: 0 0 5px #00d4ff;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        section {
+            background: rgba(27, 38, 59, 0.85);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        section:hover {
+            transform: translateY(-5px);
+        }
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+        p, ul {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+        ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+        ul li {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        ul li:before {
+            content: "";
+            color: #00d4ff;
+            position: absolute;
+            left: -20px;
+            font-size: 0.8rem;
+        }
+        button {
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #007bff, #00d4ff);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 123, 255, 0.5);
+            margin: 5px;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #0056b3, #0099cc);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.7);
+            transform: scale(1.05);
+        }
+        #disconnectWallet {
+            background: linear-gradient(90deg, #ff4d4d, #ff9999);
+        }
+        #disconnectWallet:hover {
+            background: linear-gradient(90deg, #cc0000, #ff6666);
+            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.7);
+        }
+        input, select {
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: border-color 0.3s ease;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+        }
+        input::placeholder {
+            color: #b0b0b0;
+        }
+        #status {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #b0b0b0;
+            white-space: pre-wrap;
+        }
+        .section-box {
+            background: rgba(45, 64, 89, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .presale-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .input-group label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: #00d4ff;
+        }
+        .input-group input {
+            width: 100%;
+            max-width: 300px;
+        }
+        .input-group span#paymentTokenSymbol {
+            margin-left: 10px;
+            font-size: 1rem;
+            color: #e0e0e0;
+            align-self: center;
+        }
+        .status-message {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            text-align: center;
+        }
+        .rewards-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .rewards-section {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(45, 64, 89, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .social-links a {
+            display: flex;
+            align-items: center;
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #fff;
+            text-shadow: 0 0 5px #00d4ff;
+        }
+        .social-links svg {
+            margin-right: 8px;
+            fill: #00d4ff;
+            width: 24px;
+            height: 24px;
+            transition: fill 0.3s ease;
+        }
+        .social-links a:hover svg {
+            fill: #fff;
+        }
+        .contract-address, .burned-tokens {
+            font-size: 1rem;
+            color: #00d4ff;
+            margin-top: 10px;
+            word-break: break-all;
+        }
+        footer {
+            background: linear-gradient(90deg, #007bff, #00d4ff);
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #fff;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #00d4ff, 0 0 10px #007bff; }
+            to { text-shadow: 0 0 10px #00d4ff, 0 0 20px #007bff; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section id="home">
+            <h2>Welcome to Bitcoin25</h2>
+            <p>Bitcoin25 (BTC25) is a cutting-edge deflationary token engineered for the future of DeFi. Built on the BNB Smart Chain, BTC25 combines advanced tokenomics, high-yield staking, and a pioneering node system to empower holders with unparalleled opportunities in the decentralized economy.</p>
+            <p class="contract-address"><strong>Contract Address:</strong> 0x886ae37efc7D4201718f3830B7609D225ac61407</p>
+        </section>
+
+        <section id="dapp">
+            <h2>WALLET BTC25</h2>
+            <p>Engage with the BTC25 ecosystem seamlessly through our decentralized application.</p>
+
+            <button id="connectWallet">Connect Wallet</button>
+            <button id="disconnectWallet" style="display: none;">Disconnect Wallet</button>
+            <div id="status">Wallet not connected</div>
+
+            <div class="section-box" id="presaleSection">
+                <h3>Presale Phase</h3>
+                <p><strong>Start Date:</strong> April 1, 2025 (00:00 UTC)<br><strong>End Date:</strong> July 31, 2025 (23:59 UTC)</p>
+                <p>Secure your BTC25 tokens at a fixed rate of <strong>1 USD per token</strong>. A total of <strong>10 million tokens</strong> are available for purchase using BNB or supported BEP-20 tokens. Maximum purchase per wallet: <strong>10,000 BTC25</strong>.</p>
+                <p>Tokens Sold: <span id="tokensSold">0</span> / 10,000,000</p>
+                
+                <div class="presale-form">
+                    <div class="input-group">
+                        <label for="paymentToken">Select Payment Token (BEP-20):</label>
+                        <select id="paymentToken">
+                            <option value="BNB">BNB (BEP-20)</option>
+                            <option value="0x55d398326f99059fF775485246999027B3197955">USDT (BEP-20)</option>
+                            <option value="0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56">BUSD (BEP-20)</option>
+                            <option value="0xbA2aE424d960c26247Dd6c32edC70B295c744C43">DOGE (BEP-20)</option>
+                            <option value="0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE">XRP (BEP-20)</option>
+                            <option value="0x570a5D26F7765ecB712C0924E4DE545b89fd43fD">SOL (BEP-20)</option>
+                            <option value="0xCE7de646e7208a4Ef112cb6ed5038FA6cC6b12e3">TRX (BEP-20)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="paymentAmount">Amount to Spend:</label>
+                        <input type="number" id="paymentAmount" placeholder="e.g., 10" step="0.01" min="0">
+                        <span id="paymentTokenSymbol">BNB</span>
+                    </div>
+                    <button id="buyTokens">Buy BTC25 Tokens</button>
+                    <div id="presaleStatus" class="status-message"></div>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <h3>Staking & Node Rewards - Reward Pool: 40,000,000 BTC25</h3>
+                <div class="rewards-container">
+                    <div class="rewards-section" id="stakingSection">
+                        <h4>Staking</h4>
+                        <p><strong>APY:</strong> ~86% monthly (2.87% daily, compounded)<br><strong>Lock Period:</strong> 7 days minimum</p>
+                        <p>Balance: <span id="balance">0</span> BTC25</p>
+                        <p>Staked: <span id="stakedAmount">0</span> BTC25</p>
+                        <p>Rewards: <span id="rewards">0</span> BTC25</p>
+                        <p>Lock Period Countdown: <span id="lockCountdown">N/A</span></p>
+                        <input type="number" id="stakeAmount" placeholder="Enter amount to stake" step="1">
+                        <div>
+                            <button id="stakeTokens">Stake Tokens</button>
+                            <button id="unstakeTokens">Unstake Tokens</button>
+                            <button id="claimRewards">Claim Rewards</button>
+                        </div>
+                    </div>
+                    <div class="rewards-section" id="nodeSection">
+                        <h4>Node Operations</h4>
+                        <p>Garanzia: <span id="nodeCollateral">100</span> BTC25</p>
+                        <p>Tokens Committed to Nodes: <span id="nodeCommittedTokens">0</span> BTC25</p>
+                        <p>Ricompensa giornaliera: <span id="nodeDailyReward">5</span> BTC25</p>
+                        <p>Nodo attivo: <span id="nodeActive">No</span></p>
+                        <p>Ricompense nodo: <span id="nodeRewards">0</span> BTC25</p>
+                        <div>
+                            <button id="activateNode">Activate Node</button>
+                            <button id="deactivateNode">Deactivate Node</button>
+                            <button id="claimNodeRewards">Claim Node Rewards</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-box" id="globalStats">
+                <h3>Global Statistics</h3>
+                <p>Total Tokens Staked: <span id="totalStaked">0</span> BTC25</p>
+                <p>Total Active Nodes: <span id="totalNodes">0</span></p>
+                <p class="burned-tokens"><strong>BTC25 Burned:</strong> <span id="burnedTokens">0</span> BTC25</p>
+            </div>
+
+            <div class="social-links">
+                <a href="https://x.com/btc25_community" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    @Btc25_community
+                </a>
+                <a href="https://t.me/BTC25COMMUNITY" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.417 15.181l-.397 5.584c.568 0 .814-.244 1.109-.537l2.663-2.545 5.518 4.041c1.013.564 1.725.267 2.02-.931L23.9 3.82c.349-1.302-.547-1.878-1.318-1.547L1.176 10.34c-1.229.457-1.214 1.191-.271 1.518l5.515 1.719 12.775-8.051c.54-.33 1.03-.147 .629.38z"/></svg>
+                    t.me/BTC25COMMUNITY
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Bitcoin25. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.4/dist/web3.min.js"></script>
+    <script>
+        const contractAddress = "0x886ae37efc7D4201718f3830B7609D225ac61407";
+        const INITIAL_TOTAL_SUPPLY = 50000000; // 50,000,000 BTC25
+        const BSC_MAINNET_CHAIN_ID = 56;
+
+        const abi = [
+            {"inputs":[{"internalType":"address","name":"initialOwner","type":"address"},{"internalType":"address","name":"_initialWallet","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},
+            {"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"OwnableInvalidOwner","type":"error"},
+            {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"OwnableUnauthorizedAccount","type":"error"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"}],"name":"Blacklisted","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Burn","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"collateral","type":"uint256"}],"name":"NodeActivated","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"newCollateral","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newReward","type":"uint256"}],"name":"NodeCollateralIncreased","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"NodeRewardsClaimed","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"account","type":"address"}],"name":"Paused","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"buyer","type":"address"},{"indexed":true,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"uint256","name":"tokenAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"btc25Amount","type":"uint256"}],"name":"PresalePurchase","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"RewardsClaimed","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Stake","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"token","type":"address"},{"indexed":false,"internalType":"address","name":"priceFeed","type":"address"},{"indexed":false,"internalType":"uint8","name":"decimals","type":"uint8"}],"name":"TokenAdded","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"account","type":"address"}],"name":"Unpaused","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"reward","type":"uint256"}],"name":"Unstake","type":"event"},
+            {"inputs":[],"name":"BURN_RATE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"DAILY_APY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"DECIMALS","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"MAX_PRESALE_PURCHASE","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"MIN_ACTION_INTERVAL","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"NAME","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"NODE_REWARD_THRESHOLD","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"PRESALE_END_TIME","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"PRESALE_START_TIME","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"PRESALE_SUPPLY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"STAKING_LOCK_PERIOD","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"SYMBOL","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"activateNode","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address","name":"priceFeed","type":"address"},{"internalType":"uint8","name":"decimals","type":"uint8"}],"name":"addSupportedToken","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[],"name":"availableRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"blacklist","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"buyPresaleTokensWithBNB","outputs":[],"stateMutability":"payable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"tokenAddress","type":"address"},{"internalType":"uint256","name":"tokenAmount","type":"uint256"}],"name":"buyPresaleTokensWithToken","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"calculateNodeReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"calculateReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"claimNodeRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[],"name":"claimRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[],"name":"deactivateNode","outputs":[],"stateMutability":"nonpayable","type":"function"}, // Ipotetico metodo aggiunto
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getNodeInfo","outputs":[{"internalType":"bool","name":"isActive","type":"bool"},{"internalType":"uint256","name":"startTime","type":"uint256"},{"internalType":"uint256","name":"reward","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getStakingInfo","outputs":[{"internalType":"uint256","name":"staked","type":"uint256"},{"internalType":"uint256","name":"startTime","type":"uint256"},{"internalType":"uint256","name":"reward","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"initialWallet","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"isNodeActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"lastActionTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"nodeCollateral","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"nodeDailyReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"nodeStartTimes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"presaleActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"buyer","type":"address"}],"name":"presalePurchases","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"presaleTokensSold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"_newWallet","type":"address"}],"name":"setInitialWallet","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"stake","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"stakingBalances","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"stakingStartTimes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"tokenDecimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"tokenPriceFeeds","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"totalNodeRewardsDistributed","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"totalNodes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"totalStaked","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"unstake","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[],"name":"withdrawStuckBNB","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        ];
+
+        const tokenABIs = [
+            {"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"type":"function"},
+            {"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"type":"function"}
+        ];
+
+        let web3, contract, account;
+
+        const tokenMap = {
+            "BNB": "BNB",
+            "0x55d398326f99059fF775485246999027B3197955": "USDT",
+            "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56": "BUSD",
+            "0xbA2aE424d960c26247Dd6c32edC70B295c744C43": "DOGE",
+            "0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE": "XRP",
+            "0x570a5D26F7765ecB712C0924E4DE545b89fd43fD": "SOL",
+            "0xCE7de646e7208a4Ef112cb6ed5038FA6cC6b12e3": "TRX"
+        };
+
+        const GAS_PRICE = "5"; // 5 Gwei
+        const GAS_LIMITS = {
+            approve: 80000,
+            stake: 200000,
+            unstake: 200000,
+            claimRewards: 150000,
+            activateNode: 250000,
+            deactivateNode: 250000, // Aggiunto per deactivateNode
+            claimNodeRewards: 200000,
+            buyPresaleTokensWithBNB: 300000,
+            buyPresaleTokensWithToken: 350000
+        };
+
+        async function checkAndSwitchNetwork() {
+            const chainId = await web3.eth.getChainId();
+            if (chainId !== BSC_MAINNET_CHAIN_ID) {
+                try {
+                    await window.ethereum.request({
+                        method: "wallet_switchEthereumChain",
+                        params: [{ chainId: "0x38" }],
+                    });
+                } catch (switchError) {
+                    if (switchError.code === 4902) {
+                        await window.ethereum.request({
+                            method: "wallet_addEthereumChain",
+                            params: [{
+                                chainId: "0x38",
+                                chainName: "BNB Smart Chain Mainnet",
+                                rpcUrls: ["https://bsc-dataseed.binance.org/"],
+                                nativeCurrency: { name: "BNB", symbol: "BNB", decimals: 18 },
+                                blockExplorerUrls: ["https://bscscan.com"]
+                            }]
+                        });
+                    } else {
+                        throw new Error(`Please switch to BNB Smart Chain Mainnet (Chain ID: ${BSC_MAINNET_CHAIN_ID}). Current Chain ID: ${chainId}`);
+                    }
+                }
+            }
+        }
+
+        document.getElementById("connectWallet").addEventListener("click", async () => {
+            if (!window.ethereum) {
+                alert("Please install MetaMask to connect!");
+                return;
+            }
+
+            web3 = new Web3(window.ethereum);
+            try {
+                await window.ethereum.request({ method: "eth_requestAccounts" });
+                const accounts = await web3.eth.getAccounts();
+                account = accounts[0];
+                contract = new web3.eth.Contract(abi, contractAddress);
+
+                await checkAndSwitchNetwork();
+                const chainId = await web3.eth.getChainId();
+                document.getElementById("status").innerText = `Connected: ${account}\nNetwork: BNB Smart Chain Mainnet (Chain ID: ${chainId})`;
+                document.getElementById("connectWallet").style.display = "none";
+                document.getElementById("disconnectWallet").style.display = "inline-block";
+                updateUI();
+            } catch (error) {
+                console.error(error);
+                document.getElementById("status").innerText = `Connection Failed: ${error.message}`;
+            }
+        });
+
+        document.getElementById("disconnectWallet").addEventListener("click", () => {
+            web3 = null;
+            contract = null;
+            account = null;
+            document.getElementById("status").innerText = "Wallet not connected";
+            document.getElementById("connectWallet").style.display = "inline-block";
+            document.getElementById("disconnectWallet").style.display = "none";
+            resetUI();
+        });
+
+        document.getElementById("paymentToken").addEventListener("change", (e) => {
+            document.getElementById("paymentTokenSymbol").innerText = tokenMap[e.target.value] || "";
+        });
+
+        document.getElementById("buyTokens").addEventListener("click", async () => {
+            if (!contract || !account) {
+                document.getElementById("presaleStatus").innerText = "Please connect your wallet first!";
+                return;
+            }
+
+            const paymentToken = document.getElementById("paymentToken").value;
+            const amount = document.getElementById("paymentAmount").value;
+            const statusElement = document.getElementById("presaleStatus");
+
+            if (!amount || amount <= 0) {
+                statusElement.innerText = "Please enter a valid amount!";
+                return;
+            }
+
+            statusElement.innerText = "Checking network...";
+            try {
+                await checkAndSwitchNetwork();
+                statusElement.innerText = "Checking presale status...";
+                const isPresaleActive = await contract.methods.presaleActive().call();
+                if (!isPresaleActive) {
+                    throw new Error("Presale is not active yet. It starts on April 1, 2025, 00:00 UTC.");
+                }
+
+                statusElement.innerText = "Processing transaction...";
+                if (paymentToken === "BNB") {
+                    await contract.methods.buyPresaleTokensWithBNB().send({
+                        from: account,
+                        value: web3.utils.toWei(amount, "ether"),
+                        gas: GAS_LIMITS.buyPresaleTokensWithBNB,
+                        gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                    });
+                    statusElement.innerText = `Success! Purchased BTC25 with ${amount} BNB.`;
+                } else {
+                    const tokenContract = new web3.eth.Contract(tokenABIs, paymentToken);
+                    const decimals = await getTokenDecimals(paymentToken);
+                    const tokenAmount = web3.utils.toWei(amount, decimals === 18 ? "ether" : decimals === 8 ? "gwei" : "mwei");
+                    await tokenContract.methods.approve(contractAddress, tokenAmount).send({
+                        from: account,
+                        gas: GAS_LIMITS.approve,
+                        gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                    });
+                    await contract.methods.buyPresaleTokensWithToken(paymentToken, tokenAmount).send({
+                        from: account,
+                        gas: GAS_LIMITS.buyPresaleTokensWithToken,
+                        gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                    });
+                    statusElement.innerText = `Success! Purchased BTC25 with ${amount} ${tokenMap[paymentToken]}.`;
+                }
+                updateUI();
+            } catch (error) {
+                console.error("Transaction Error:", error);
+                statusElement.innerText = error.message || "Transaction failed. Check console for details.";
+            }
+        });
+
+        document.getElementById("stakeTokens").addEventListener("click", async () => {
+            if (!contract || !account) {
+                alert("Please connect your wallet first!");
+                return;
+            }
+
+            const amount = document.getElementById("stakeAmount").value;
+            if (!amount || amount <= 0) {
+                alert("Please enter a valid amount!");
+                return;
+            }
+
+            try {
+                await checkAndSwitchNetwork();
+
+                const balance = await contract.methods.balanceOf(account).call();
+                const amountWei = web3.utils.toWei(amount, "ether");
+                if (balance < amountWei) {
+                    throw new Error(`Insufficient BTC25 balance. You have ${web3.utils.fromWei(balance, "ether")} BTC25, need ${amount} BTC25.`);
+                }
+
+                const isPaused = await contract.methods.paused().call();
+                if (isPaused) {
+                    throw new Error("Contract is paused. Staking is currently disabled.");
+                }
+
+                const lastAction = await contract.methods.lastActionTime(account).call();
+                const minInterval = await contract.methods.MIN_ACTION_INTERVAL().call();
+                const currentTime = Math.floor(Date.now() / 1000);
+                if (currentTime < Number(lastAction) + Number(minInterval)) {
+                    const waitTime = (Number(lastAction) + Number(minInterval) - currentTime) / 60;
+                    throw new Error(`Action too frequent. Wait ${Math.ceil(waitTime)} minutes (until ${new Date((Number(lastAction) + Number(minInterval)) * 1000).toUTCString()}).`);
+                }
+
+                const isBlacklisted = await contract.methods.blacklist(account).call();
+                if (isBlacklisted) {
+                    throw new Error("Your address is blacklisted. Staking is disabled.");
+                }
+
+                await contract.methods.approve(contractAddress, amountWei).send({
+                    from: account,
+                    gas: GAS_LIMITS.approve,
+                    gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                });
+                await contract.methods.stake(amountWei).send({
+                    from: account,
+                    gas: GAS_LIMITS.stake,
+                    gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                });
+                updateUI();
+                alert("Staking successful!");
+            } catch (error) {
+                console.error("Staking Error:", error);
+                alert(`Staking failed: ${error.message}`);
+            }
+        });
+
+        document.getElementById("unstakeTokens").addEventListener("click", async () => {
+            if (!contract || !account) {
+                alert("Please connect your wallet first!");
+                return;
+            }
+
+            const amount = document.getElementById("stakeAmount").value;
+            if (!amount || amount <= 0) {
+                alert("Please enter a valid amount!");
+                return;
+            }
+
+            try {
+                await checkAndSwitchNetwork();
+                const stakingInfo = await contract.methods.getStakingInfo(account).call();
+                const stakedAmount = stakingInfo[0];
+                const amountWei = web3.utils.toWei(amount, "ether");
+                const startTime = Number(stakingInfo[1]) * 1000;
+                const lockPeriod = 7 * 24 * 60 * 60 * 1000; // 7 giorni in millisecondi
+                const unlockTime = startTime + lockPeriod;
+                const currentTime = Date.now();
+
+                if (stakedAmount < amountWei) {
+                    throw new Error(`Insufficient staked amount. You have ${web3.utils.fromWei(stakedAmount, "ether")} BTC25 staked, need ${amount} BTC25.`);
+                }
+                if (currentTime < unlockTime) {
+                    const timeLeft = (unlockTime - currentTime) / 1000 / 60 / 60 / 24; // giorni rimanenti
+                    throw new Error(`Tokens are still locked. You can unstake in ${timeLeft.toFixed(2)} days.`);
+                }
+
+                await contract.methods.unstake(amountWei).send({
+                    from: account,
+                    gas: GAS_LIMITS.unstake,
+                    gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                });
+                updateUI();
+                alert("Unstaking successful!");
+            } catch (error) {
+                console.error(error);
+                alert(`Unstaking failed: ${error.message}`);
+            }
+        });
+
+        document.getElementById("claimRewards").addEventListener("click", async () => {
+            if (!contract || !account) {
+                alert("Please connect your wallet first!");
+                return;
+            }
+
+            try {
+                await checkAndSwitchNetwork();
+                await contract.methods.claimRewards().send({
+                    from: account,
+                    gas: GAS_LIMITS.claimRewards,
+                    gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                });
+                updateUI();
+                alert("Rewards claimed successfully!");
+            } catch (error) {
+                console.error(error);
+                alert(`Claim failed: ${error.message}`);
+            }
+        });
+
+        document.getElementById("activateNode").addEventListener("click", async () => {
+            if (!contract || !account) {
+                alert("Please connect your wallet first!");
+                return;
+            }
+
+            try {
+                await checkAndSwitchNetwork();
+                const collateral = await contract.methods.nodeCollateral().call();
+                const balance = await contract.methods.balanceOf(account).call();
+                if (balance < collateral) {
+                    throw new Error(`Insufficient balance for node activation. Need ${web3.utils.fromWei(collateral, "ether")} BTC25.`);
+                }
+
+                await contract.methods.approve(contractAddress, collateral).send({
+                    from: account,
+                    gas: GAS_LIMITS.approve,
+                    gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                });
+                await contract.methods.activateNode().send({
+                    from: account,
+                    gas: GAS_LIMITS.activateNode,
+                    gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                });
+                updateUI();
+                alert("Node activated successfully!");
+            } catch (error) {
+                console.error(error);
+                alert(`Node activation failed: ${error.message}`);
+            }
+        });
+
+        document.getElementById("deactivateNode").addEventListener("click", async () => {
+            if (!contract || !account) {
+                alert("Please connect your wallet first!");
+                return;
+            }
+
+            try {
+                await checkAndSwitchNetwork();
+                const isActive = await contract.methods.isNodeActive(account).call();
+                if (!isActive) {
+                    throw new Error("No active node to deactivate.");
+                }
+
+                const lastAction = await contract.methods.lastActionTime(account).call();
+                const minInterval = await contract.methods.MIN_ACTION_INTERVAL().call();
+                const currentTime = Math.floor(Date.now() / 1000);
+                if (currentTime < Number(lastAction) + Number(minInterval)) {
+                    const waitTime = (Number(lastAction) + Number(minInterval) - currentTime) / 60;
+                    throw new Error(`Action too frequent. Wait ${Math.ceil(waitTime)} minutes (until ${new Date((Number(lastAction) + Number(minInterval)) * 1000).toUTCString()}).`);
+                }
+
+                console.log("Deactivating node...");
+                await contract.methods.deactivateNode().send({
+                    from: account,
+                    gas: GAS_LIMITS.deactivateNode,
+                    gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                });
+                updateUI();
+                alert("Node deactivated successfully! Tokens returned to your wallet.");
+            } catch (error) {
+                console.error("Deactivation Error:", error);
+                alert(`Node deactivation failed: ${error.message}`);
+            }
+        });
+
+        document.getElementById("claimNodeRewards").addEventListener("click", async () => {
+            if (!contract || !account) {
+                alert("Please connect your wallet first!");
+                return;
+            }
+
+            try {
+                await checkAndSwitchNetwork();
+
+                const isPaused = await contract.methods.paused().call();
+                if (isPaused) throw new Error("Contract is paused.");
+                const isActive = await contract.methods.isNodeActive(account).call();
+                if (!isActive) throw new Error("Node not active.");
+                const lastAction = await contract.methods.lastActionTime(account).call();
+                const minInterval = await contract.methods.MIN_ACTION_INTERVAL().call();
+                const currentTime = Math.floor(Date.now() / 1000);
+                if (currentTime < Number(lastAction) + Number(minInterval)) {
+                    const waitTime = (Number(lastAction) + Number(minInterval) - currentTime) / 60;
+                    throw new Error(`Action too frequent. Wait ${Math.ceil(waitTime)} minutes (until ${new Date((Number(lastAction) + Number(minInterval)) * 1000).toUTCString()}).`);
+                }
+                const reward = await contract.methods.calculateNodeReward(account).call();
+                if (reward == 0) throw new Error("No rewards available yet.");
+
+                console.log("Claiming node rewards...");
+                await contract.methods.claimNodeRewards().send({
+                    from: account,
+                    gas: GAS_LIMITS.claimNodeRewards,
+                    gasPrice: web3.utils.toWei(GAS_PRICE, "gwei")
+                });
+                updateUI();
+                alert("Node rewards claimed successfully!");
+            } catch (error) {
+                console.error("Claim Error:", error);
+                alert(`Node rewards claim failed: ${error.message}`);
+            }
+        });
+
+        async function updateUI() {
+            if (!contract || !account) {
+                resetUI();
+                return;
+            }
+
+            try {
+                await checkAndSwitchNetwork();
+                const tokensSold = await contract.methods.presaleTokensSold().call();
+                const stakingInfo = await contract.methods.getStakingInfo(account).call();
+                const balance = await contract.methods.balanceOf(account).call();
+                const nodeInfo = await contract.methods.getNodeInfo(account).call();
+                const nodeCollateral = await contract.methods.nodeCollateral().call();
+                const nodeDailyReward = await contract.methods.nodeDailyReward().call();
+                const totalSupply = await contract.methods.totalSupply().call();
+                const totalStaked = await contract.methods.totalStaked().call();
+                const totalNodes = await contract.methods.totalNodes().call();
+
+                const { committedTokens } = await getNodeData(account);
+
+                const initialSupplyWei = web3.utils.toBN(web3.utils.toWei(INITIAL_TOTAL_SUPPLY.toString(), "ether"));
+                const currentSupplyWei = web3.utils.toBN(totalSupply);
+                const burnedTokensWei = initialSupplyWei.sub(currentSupplyWei);
+                const burnedTokens = burnedTokensWei.lt(web3.utils.toBN(0))
+                    ? "0"
+                    : Number(web3.utils.fromWei(burnedTokensWei, "ether")).toLocaleString();
+
+                const stakingStartTime = Number(stakingInfo[1]) * 1000;
+                const lockPeriod = 7 * 24 * 60 * 60 * 1000; // 7 giorni in millisecondi
+                const unlockTime = stakingStartTime + lockPeriod;
+
+                document.getElementById("tokensSold").innerText = Number(web3.utils.fromWei(tokensSold, "ether")).toLocaleString();
+                document.getElementById("balance").innerText = web3.utils.fromWei(balance, "ether");
+                document.getElementById("stakedAmount").innerText = web3.utils.fromWei(stakingInfo[0], "ether");
+                document.getElementById("rewards").innerText = web3.utils.fromWei(stakingInfo[2], "ether");
+                document.getElementById("nodeCommittedTokens").innerText = committedTokens;
+                document.getElementById("nodeActive").innerText = nodeInfo[0] ? "Sì" : "No";
+                document.getElementById("nodeRewards").innerText = web3.utils.fromWei(nodeInfo[2], "ether");
+                document.getElementById("nodeCollateral").innerText = web3.utils.fromWei(nodeCollateral, "ether");
+                document.getElementById("nodeDailyReward").innerText = web3.utils.fromWei(nodeDailyReward, "ether");
+                document.getElementById("totalStaked").innerText = Number(web3.utils.fromWei(totalStaked, "ether")).toLocaleString();
+                document.getElementById("totalNodes").innerText = totalNodes.toString();
+                document.getElementById("burnedTokens").innerText = burnedTokens;
+
+                updateLockCountdown(unlockTime);
+            } catch (error) {
+                console.error("Update UI Error:", error);
+                document.getElementById("status").innerText += `\nUI Update Failed: ${error.message}`;
+            }
+        }
+
+        async function getNodeData(userAddress) {
+            try {
+                const isActive = await contract.methods.isNodeActive(userAddress).call();
+                const collateralPerNode = await contract.methods.nodeCollateral().call();
+
+                console.log("getNodeData - isActive:", isActive, "Collateral per Node:", web3.utils.fromWei(collateralPerNode, "ether"));
+
+                if (isActive) {
+                    const committedTokens = web3.utils.fromWei(collateralPerNode, "ether");
+                    console.log("Node is active, committed tokens:", committedTokens);
+                    return { committedTokens };
+                }
+
+                const events = await contract.getPastEvents("NodeActivated", {
+                    filter: { user: userAddress },
+                    fromBlock: 0,
+                    toBlock: "latest"
+                });
+                console.log("NodeActivated Events:", events);
+
+                let committedTokensWei = web3.utils.toBN(0);
+                if (events.length > 0) {
+                    events.forEach(event => {
+                        const collateral = event.returnValues.collateral || collateralPerNode;
+                        committedTokensWei = committedTokensWei.add(web3.utils.toBN(collateral));
+                    });
+                    const committedTokens = web3.utils.fromWei(committedTokensWei, "ether");
+                    console.log("Calculated from events, committed tokens:", committedTokens);
+                    return { committedTokens };
+                }
+
+                console.log("No active node or events found, committed tokens: 0");
+                return { committedTokens: "0" };
+            } catch (error) {
+                console.error("Error getting node data:", error);
+                return { committedTokens: "0" };
+            }
+        }
+
+        function updateLockCountdown(unlockTime) {
+            const countdownElement = document.getElementById("lockCountdown");
+            if (!unlockTime || unlockTime === 0) {
+                countdownElement.innerText = "N/A";
+                return;
+            }
+
+            const interval = setInterval(() => {
+                const currentTime = Date.now();
+                const timeLeft = unlockTime - currentTime;
+
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    countdownElement.innerText = "Unlocked";
+                } else {
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    countdownElement.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
+            }, 1000);
+        }
+
+        function resetUI() {
+            document.getElementById("tokensSold").innerText = "0";
+            document.getElementById("balance").innerText = "0";
+            document.getElementById("stakedAmount").innerText = "0";
+            document.getElementById("rewards").innerText = "0";
+            document.getElementById("lockCountdown").innerText = "N/A";
+            document.getElementById("nodeCommittedTokens").innerText = "0";
+            document.getElementById("nodeActive").innerText = "No";
+            document.getElementById("nodeRewards").innerText = "0";
+            document.getElementById("nodeCollateral").innerText = "100";
+            document.getElementById("nodeDailyReward").innerText = "5";
+            document.getElementById("totalStaked").innerText = "0";
+            document.getElementById("totalNodes").innerText = "0";
+            document.getElementById("burnedTokens").innerText = "0";
+            document.getElementById("presaleStatus").innerText = "";
+        }
+
+        async function getTokenDecimals(tokenAddress) {
+            if (tokenAddress === "0xbA2aE424d960c26247Dd6c32edC70B295c744C43") return 8; // DOGE
+            if (tokenAddress === "0xCE7de646e7208a4Ef112cb6ed5038FA6cC6b12e3") return 6; // TRX
+            return 18; // Default per USDT, BUSD, XRP, SOL
+        }
+    </script>
+</body>
+</html>
